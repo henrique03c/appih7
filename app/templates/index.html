@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic" media="all">
+    <title id="title">Dashboard</title>
+    <link rel="shortcut icon" href="{% static 'images/ih7.ico' %}"/>
+    <link type="text/css" rel="stylesheet" href="{% static 'css/home.css' %}">
+  </head>
+  <body class="body">
+    <div class="main">
+
+      <div id="notificacao" class="notificacao">
+        <div class="nicon">
+
+          <div id="nc">
+            <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+              <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+            </svg>
+          </div>
+
+        </div>
+        <div class="nclose">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+            <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"/>
+          </svg>
+        </div>
+        <div class="notifi"></div>
+      </div>
+
+      <div class="nav">
+        <a href="/" aria-current="page" class="ih7">
+          <div class="logo-text">ih7</div>
+        </a>
+        <div class="div-link">
+          <div class="nav-wrap">
+            <a href="https://www.linkedin.com/in/ihenri3/" target="_blank" class="nav-link">
+              <img src="{% static 'images/linkedin.svg' %}" loading="lazy" alt="logo Linkedin" class="image">
+            </a>
+          </div>
+          <div class="nav-wrap">
+            <a href="https://github.com/ihenri3" target="_blank" class="nav-link">
+              <img src="{% static 'images/github.svg' %}" loading="lazy" alt="logo github" class="image">
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard">
+        <div class="box-info">
+          <div class="titulo">Clientes</div>
+
+          <div class="search">
+            <form class="form" method="get">
+              <input type="text" id="search" name="search" class="input-50" placeholder="Pesquisa por nome" value="{{request.GET.search}}">
+
+              <button type="submit" class="searchicon" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+              </button>
+            </form>
+            {% if 'search' in request.GET %}<a href="/" class="limpar">limpar pesquisa</a>{% endif %}
+          </div>
+
+          <div class="div-background">
+            <div class="box-clientes">
+              {% if db %}{%else%}<div class="text-title">Nenhum cliente cadastrado</div>{% if 'search' in request.GET %}<div class="text-title">com esse nome</div>{% endif %} {% endif %}
+              {% for dbs in db %}
+
+                <div class='box'>
+                  <div class='box_all'>
+                    <div class='box_icon'>{{dbs.nome|slice:":2"}} </div>
+
+                    <div class='box_name'>
+                      <div class='text-title'>{{dbs.nome}}</div>
+                      <div class='mail'>{{dbs.email}}</div>
+                    </div>
+
+                    <div class='box-atalho'>
+                      <a href="/vizualizar/{{dbs.id}}/" class='atalho visu' title='Visualizar {{dbs.nome}}'>
+                        <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='currentColor' class='bi bi-info-square' viewBox='0 0 16 16'>
+                          <path d='M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z'/>
+                          <path d='m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z'/>
+                        </svg>
+                      </a>
+                      <a href="/editar/{{dbs.id}}/" class='atalho alter' title='Editar {{dbs.nome}}'>
+                        <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='currentColor' class='bi bi-pencil-square' viewBox='0 0 16 16'>
+                          <path d='M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z'/>
+                          <path fill-rule='evenodd' d='M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z'/>
+                        </svg>
+                      </a>
+
+                      <a href="/deletar/{{dbs.id}}/" class='atalho delet bdel' title='Deletar {{dbs.nome}}'>
+                        <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='currentColor' class='bi bi-trash' viewBox='0 0 16 16'>
+                          <path d='M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z'/>
+                          <path fill-rule='evenodd' d='M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z'/>
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+              {% endfor %}
+            </div>
+            <a href="/cadastro" class="button">Adicionar Cliente</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="{% static 'javascript/home.js' %}"></script>
+  </body>
+</html>

@@ -1,0 +1,85 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic" media="all">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title id="title">Visualizar Cliente</title>
+    <link rel="shortcut icon" href="{% static 'images/ih7.ico' %}"/>
+    <link type="text/css" rel="stylesheet" href="{% static 'css/alterar.css' %}">
+  </head>
+  <body class="body">
+    <div class="main">
+
+      <div class="nav">
+        <a href="/" aria-current="page" class="ih7">
+          <div class="logo-text">ih7</div>
+        </a>
+        <div class="div-link">
+          <div class="nav-wrap">
+            <a href="https://www.linkedin.com/in/ihenri3/" target="_blank" class="nav-link">
+              <img src="{% static 'images/linkedin.svg' %}" loading="lazy" alt="logo Linkedin" class="image">
+            </a>
+          </div>
+          <div class="nav-wrap">
+            <a href="https://github.com/ihenri3" target="_blank" class="nav-link">
+              <img src="{% static 'images/github.svg' %}" loading="lazy" alt="logo github" class="image">
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="adicionar">
+        <div class="box-all">
+          <div class="titulo">Visualizar {{db.nome}}</div>
+          <div class="div-add">
+            <div class="form-block">
+              <form autocomplete="on" class="form" name="form" id="form" method="post">
+                <div class="div-50">
+                  <label for="id_nome" class="field-label">Name</label>
+                  <input type="text" class="input-100" maxlength="256" name="nome" data-name="nome" placeholder="Nome" id="nome" disabled value="{{db.nome}}" required="">
+                </div>
+                <div class="div-50">
+                  <label for="id_email" class="field-label">Email</label>
+                  <input type="email" class="input-100" maxlength="256" name="email" data-name="email" placeholder="Email" id="email" disabled value="{{db.email}}" required="">
+                </div>
+                <div class="div-50">
+                  <label for="id_telefone" class="field-label">Telefone</label>
+                  <input type="tel" class="input-100" autofocus="true" maxlength="256" name="telefone" data-name="telefone" placeholder="Telefone" disabled value="{{db.telefone}}" id="id_telefone" required="">
+                </div>
+                <div class="div-50">
+                  <label for="id_endereco" class="field-label">Endereço</label>
+                  <input type="text" class="input-100" autofocus="true" maxlength="256" name="endereco" data-name="endereco" placeholder="Endereço" disabled value="{{db.endereco}}" id="endereco" required="">
+                </div>
+                <div class="div-100">
+                  <div class="div-30">
+                    <label for="id_bairro" class="field-label">Bairro</label>
+                    <input type="text" class="input-50" autofocus="true" maxlength="256" name="bairro" data-name="bairro" placeholder="Bairro" disabled value="{{db.bairro}}" id="bairro" required="">
+                  </div>
+                  <div class="div-30">
+                    <label for="id_cidade" class="field-label">Cidade</label>
+                    <input type="text" class="input-50" autofocus="true" maxlength="256" name="cidade" data-name="cidade" placeholder="Cidade" disabled value="{{db.cidade}}" id="cidade" required="">
+                  </div>
+                  <div class="div-30">
+                    <label for="id_cep" class="field-label">Cep</label>
+                    <input type="text" class="input-50" autofocus="true" maxlength="256" name="cep" data-name="cep" placeholder="Cep" disabled value="{{db.cep}}" id="cep">
+                  </div>
+                </div>
+
+                <div class="bts">
+                  <a class="btnw col-md-5 btn btn-outline-secondary" href='/editar/{{db.id}}/'>Editar</a>
+                  <a class="btnw col-md-5 btn btn-outline-primary" href='/'>Voltar</a>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
