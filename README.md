@@ -10,7 +10,7 @@ app com cadastro de cliente feito com python.
 
 > banco de dados: sqlite3
 
-> layout [dashboard](https://github.com/ihenri3/dashboard-aempresa)
+> layout utilizado [dashboard](https://github.com/ihenri3/dashboard-aempresa)
 
 > o app busca cliente, cadastra, visualiza, atualiza e deleta.
 
